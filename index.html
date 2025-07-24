@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Decrypt QR Data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <style>
+    body { margin: 0; background: #f8f9fa; font-family: sans-serif; }
+    .container { max-width: 480px; margin: auto; padding: 16px; background: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+    input[type="password"], button { width: 100%; padding: 14px; font-size: 1rem; margin-top: 10px; border-radius: 4px; border: 1px solid #ccc; }
+    button { background: #007bff; color: white; border: none; }
+    #result { margin-top: 20px; white-space: pre-wrap; font-size: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔑 Enter Password to Reveal</h2>
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="decrypt()">Decrypt</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const encryptedBase64 = urlParams.get('data') || '';
+
+    function decrypt() {
+      const pw = document.getElementById("password").value;
+      try {
+        const key = CryptoJS.enc.Utf8.parse(pw.padEnd(16).substring(0, 16));
+        const decrypted = CryptoJS.AES.decrypt({ ciphertext: CryptoJS.enc.Base64.parse(encryptedBase64) }, key, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+        const result = decrypted.toString(CryptoJS.enc.Utf8);
+        document.getElementById("result").innerText = result || "[Wrong password or corrupted data]";
+      } catch {
+        document.getElementById("result").innerText = "[Error decrypting data]";
+      }
+    }
+  </script>
+</body>
+</html>
