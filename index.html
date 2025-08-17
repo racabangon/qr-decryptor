@@ -6,21 +6,94 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
-    body { margin: 0; background: #f8f9fa; font-family: sans-serif; }
-    .container { max-width: 480px; margin: auto; padding: 16px; background: #fff; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-    h2 { font-size: 1.5rem; margin-bottom: 1rem; }
-    input[type="password"], button { width: 100%; padding: 14px; font-size: 1rem; margin-top: 10px; border-radius: 4px; border: 1px solid #ccc; }
-    button { background: #007bff; color: white; border: none; }
-    #result { margin-top: 20px; white-space: pre-wrap; font-size: 1rem; }
+    body {
+      margin: 0;
+      background: #f8f9fa;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    
+    }
+
+    .site-header,
+    .site-footer {
+      background-color: #007bff;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 480px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left:auto;
+      margin-right:auto;
+      border-radius: 5px;
+      padding: 16px;
+      background: #fff;
+      min-height: calc(100vh - 160px); /* Adjust height for header & footer */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    input[type="password"],
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 1rem;
+      margin-top: 10px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      font-size: 1rem;
+    }
+
+    /* Optional: Remove or repurpose this */
+    .body-container {
+      display: block;
+      justify-content: center;
+      background-color: lightgray;
+    }
   </style>
 </head>
-<body>
+<body class="body-container">
+
+  <header class="site-header">
+    D'ConnectedUX
+  </header>
+
   <div class="container">
-    <h2>🔑 Enter Password to Reveal</h2>
+    <h2>🔑 Enter the Password</h2>
     <input type="password" id="password" placeholder="Password" />
     <button onclick="decrypt()">Decrypt</button>
     <div id="result"></div>
   </div>
+
+  <footer class="site-footer">
+   All rights reserved © 2025 <strong>D'ConnectedUX.</strong> 
+  </footer>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
